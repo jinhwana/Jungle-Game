@@ -1,0 +1,152 @@
+import view.GameView;
+import logic.ConstantValues;
+import logic.Coordinate;
+import logic.Game;
+import logic.GameBoard;
+import logic.piece.Piece;
+import logic.piece.StandardJunglePiece;
+import logic.tile.Tile;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+public class Jungle extends Game{
+	public GameBoard gb;
+	public Tile[][] tile;
+    
+	@Override
+	public int whoWon(){
+		return super.whoWon();
+	}
+	
+	@Override
+	public void initBoard(){
+		tile = new Tile[ConstantValues.ROWS][ConstantValues.COLUMNS];
+		for(int i = 0; i < ConstantValues.ROWS; i++){
+            for(int j = 0; j < ConstantValues.COLUMNS; j++){
+                 tile[i][j] = new Tile(new Coordinate(i, j), "Tile");
+            }
+       }
+		Coordinate waterC1 = new Coordinate(3, 1);
+        Coordinate waterC2 = new Coordinate(3, 2);
+        Coordinate waterC3 = new Coordinate(4, 1);
+        Coordinate waterC4 = new Coordinate(4, 2);
+        Coordinate waterC5 = new Coordinate(5, 1);
+        Coordinate waterC6 = new Coordinate(5, 2);
+        
+        Coordinate waterC11 = new Coordinate(3, 4);
+        Coordinate waterC12 = new Coordinate(3, 5);
+        Coordinate waterC13 = new Coordinate(4, 4);
+        Coordinate waterC14 = new Coordinate(4, 5);
+        Coordinate waterC15 = new Coordinate(5, 4);
+        Coordinate waterC16 = new Coordinate(5, 5);
+        
+        Coordinate trapC1 = new Coordinate(0, 2);
+        Coordinate trapC2 = new Coordinate(0, 4);
+        Coordinate trapC3 = new Coordinate(1, 3);
+        
+        Coordinate trapC11 = new Coordinate(8, 2);
+        Coordinate trapC12 = new Coordinate(8, 4);
+        Coordinate trapC13 = new Coordinate(7, 3);
+        
+        Coordinate den1 = new Coordinate(0, 3);
+        Coordinate den2 = new Coordinate(8, 3);
+        
+        tile[3][1] = new Tile(waterC1, "Water");
+        tile[3][2] = new Tile(waterC2, "Water");
+        tile[4][1] = new Tile(waterC3, "Water");
+        tile[4][2] = new Tile(waterC4, "Water");
+        tile[5][1] = new Tile(waterC5, "Water");
+        tile[5][2] = new Tile(waterC6, "Water");
+        
+        tile[3][4] = new Tile(waterC11, "Water");
+        tile[3][5] = new Tile(waterC12, "Water");
+        tile[4][4] = new Tile(waterC13, "Water");
+        tile[4][5] = new Tile(waterC14, "Water");
+        tile[5][4] = new Tile(waterC15, "Water");
+        tile[5][5] = new Tile(waterC16, "Water");
+        
+        tile[0][2] = new Tile(trapC1, "Trap");
+        tile[0][4] = new Tile(trapC2, "Trap");
+        tile[1][3] = new Tile(trapC3, "Trap");
+        
+        tile[8][2] = new Tile(trapC11, "Trap");
+        tile[8][4] = new Tile(trapC12, "Trap");
+        tile[7][3] = new Tile(trapC13, "Trap");
+        
+        tile[0][3] = new Tile(den1, "Den");
+        tile[8][3] = new Tile(den2, "Den");
+		
+        gb = new GameBoard(tile);
+	}
+	
+	@Override
+	public void initPieces(){
+		StandardJunglePiece ratPieceRed = new StandardJunglePiece(ConstantValues.RED_SIDE, 0, ConstantValues.GAMEPIECE_CAT, "Rat");
+        StandardJunglePiece catPieceRed = new StandardJunglePiece(ConstantValues.RED_SIDE, 0, ConstantValues.GAMEPIECE_CAT, "Cat");
+        StandardJunglePiece dogPieceRed = new StandardJunglePiece(ConstantValues.RED_SIDE, 0, ConstantValues.GAMEPIECE_DOG, "Dog");
+        StandardJunglePiece wolfPieceRed = new StandardJunglePiece(ConstantValues.RED_SIDE, 0, ConstantValues.GAMEPIECE_WOLF, "Wolf");
+        StandardJunglePiece leopardPieceRed = new StandardJunglePiece(ConstantValues.RED_SIDE, 0, ConstantValues.GAMEPIECE_LEOPARD, "Leopard");
+        StandardJunglePiece tigerPieceRed = new StandardJunglePiece(ConstantValues.RED_SIDE, 0, ConstantValues.GAMEPIECE_TIGER, "Tiger");
+        StandardJunglePiece lionPieceRed = new StandardJunglePiece(ConstantValues.RED_SIDE, 0, ConstantValues.GAMEPIECE_LION, "Lion");
+        StandardJunglePiece elephantPieceRed = new StandardJunglePiece(ConstantValues.RED_SIDE, 0, ConstantValues.GAMEPIECE_ELEPHANT, "Elephant");
+        
+        StandardJunglePiece ratPieceBlue = new StandardJunglePiece(ConstantValues.BLUE_SIDE, 0, ConstantValues.GAMEPIECE_CAT, "Rat");
+        StandardJunglePiece catPieceBlue = new StandardJunglePiece(ConstantValues.BLUE_SIDE, 0, ConstantValues.GAMEPIECE_CAT, "Cat");
+        StandardJunglePiece dogPieceBlue = new StandardJunglePiece(ConstantValues.BLUE_SIDE, 0, ConstantValues.GAMEPIECE_DOG, "Dog");
+        StandardJunglePiece wolfPieceBlue = new StandardJunglePiece(ConstantValues.BLUE_SIDE, 0, ConstantValues.GAMEPIECE_WOLF, "Wolf");
+        StandardJunglePiece leopardPieceBlue = new StandardJunglePiece(ConstantValues.BLUE_SIDE, 0, ConstantValues.GAMEPIECE_LEOPARD, "Leopard");
+        StandardJunglePiece tigerPieceBlue = new StandardJunglePiece(ConstantValues.BLUE_SIDE, 0, ConstantValues.GAMEPIECE_TIGER, "Tiger");
+        StandardJunglePiece lionPieceBlue = new StandardJunglePiece(ConstantValues.BLUE_SIDE, 0, ConstantValues.GAMEPIECE_LION, "Lion");
+        StandardJunglePiece elephantPieceBlue = new StandardJunglePiece(ConstantValues.BLUE_SIDE, 0, ConstantValues.GAMEPIECE_ELEPHANT, "Elephant");
+        
+
+        getTile(2, 0).placePiece(ratPieceBlue);
+        getTile(1, 5).placePiece(catPieceBlue);
+        getTile(1, 1).placePiece(dogPieceBlue);
+        getTile(2, 4).placePiece(wolfPieceBlue);
+        getTile(2, 2).placePiece(leopardPieceBlue);
+        getTile(0, 6).placePiece(tigerPieceBlue);
+        getTile(0, 0).placePiece(lionPieceBlue);
+        getTile(2, 6).placePiece(elephantPieceBlue);
+        /*
+        getBlackPieces().add(ratPieceBlue);
+        getBlackPieces().add(catPieceBlue);
+        g.getBlackPieces().add(dogPieceBlue);
+        g.getBlackPieces().add(wolfPieceBlue);
+        g.getBlackPieces().add(leopardPieceBlue);
+        g.getBlackPieces().add(tigerPieceBlue);
+        g.getBlackPieces().add(lionPieceBlue);
+        g.getBlackPieces().add(elephantPieceBlue);
+        
+        g.getTile(6, 6).placePiece(ratPieceRed);
+        g.getTile(7, 1).placePiece(catPieceRed);
+        g.getTile(7, 5).placePiece(dogPieceRed);
+        g.getTile(6, 2).placePiece(wolfPieceRed);
+        g.getTile(6, 4).placePiece(leopardPieceRed);
+        g.getTile(8, 0).placePiece(tigerPieceRed); 
+        g.getTile(8, 6).placePiece(lionPieceRed);
+        g.getTile(6, 0).placePiece(elephantPieceRed);
+        
+        g.getRedPieces().add(ratPieceRed);
+        g.getRedPieces().add(catPieceRed);
+        g.getRedPieces().add(dogPieceRed);
+        g.getRedPieces().add(wolfPieceRed);
+        g.getRedPieces().add(leopardPieceRed);
+        g.getRedPieces().add(tigerPieceRed);
+        g.getRedPieces().add(lionPieceRed);
+        g.getRedPieces().add(elephantPieceRed);
+        */
+	}
+        
+	
+	public static void main(String[] args){
+		Jungle game = new Jungle();
+		game.whoWon();
+		game.initBoard();
+		game.initPieces();
+		GameView gv = new GameView(game);
+	}
+	
+}
